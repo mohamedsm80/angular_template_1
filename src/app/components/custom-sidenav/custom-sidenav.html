@@ -4,15 +4,18 @@
         </mat-nav-list> -->
 
 <div class="sidenav-header">
-    <img width="100" height="100" src="/images/logo.png" alt="">
-    <div class="header-text">
+    <img [width]="profilePicSize()" [height]="profilePicSize()" src="/images/logo.png" alt="">
+    <div class="header-text" [class.hide-header-text]="sideNavCollapsed()">
         <h2>جهاز تنمية المشروعات</h2>
         <p>MSMEDA</p>
     </div>
 </div>   
 <mat-nav-list>
     @for (item of menuItem(); track $index) {
-        <a mat-list-item><mat-icon matListItemIcon>{{item.icon}}</mat-icon> <span matListItemTitle>{{item.label}}</span></a>
+        <a mat-list-item [routerLink]="item.route" routerLinkActive [routerLinkActiveOptions]="{ exact: true }" #rla="routerLinkActive"  [activated]="rla.isActive">
+            <mat-icon matListItemIcon>{{item.icon}}</mat-icon> 
+            @if(!sideNavCollapsed()) {<span matListItemTitle>{{item.label}}</span>}
+        </a>
     } @empty {
          <p>No items found</p> 
     }
