@@ -12,14 +12,19 @@ import { MatSidenav } from '@angular/material/sidenav';
 
 import { CustomSidenav } from "./components/custom-sidenav/custom-sidenav";
 
+
 @Component({
   selector: 'app-root',
   imports: [CommonModule, RouterOutlet, MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavModule, MatSidenavContainer, MatSidenavContent, MatSidenav, CustomSidenav],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
+  
 })
 export class App {
-  collapsed = signal(false);
+
+isSidebarOpen = true;
+
+   collapsed = signal(false);
   sidenavWidth = computed(() => {
     return this.collapsed() ? '65px' : '250px';
   })
