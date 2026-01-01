@@ -1,5 +1,5 @@
 import { Component, computed, Input, signal } from '@angular/core';
-
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from "@angular/material/icon";
@@ -16,7 +16,13 @@ export type MenuItem = {
   imports: [CommonModule, MatListModule, MatIconModule, RouterLink, RouterLinkActive],
   templateUrl: './custom-sidenav.html',
   styleUrl: './custom-sidenav.scss',
-  
+  animations: [
+    trigger('sidenavWidth', [
+      state('open', style({ width: '260px' })),
+      state('closed', style({ width: '70px' })),
+      transition('open <=> closed', animate('500ms ease-in-out'))
+    ])
+  ]
 })
 export class CustomSidenav {
   sideNavCollapsed = signal(false);
